@@ -70,8 +70,10 @@ class MonteCarlo:
         else:
             payoffs = np.maximum(K - ST, 0)
         discounted_payoffs = np.exp(-r * T) * payoffs
-        price = np.mean(discounted_payoffs)
-        se = np.std(discounted_payoffs, ddof = 1) / np.sqrt(self.n_simulations)
+        n_half = self.n_simulations // 2
+        paired_payoffs = (discounted_payoffs[:n_half] + discounted_payoffs[n_half:]) / 2
+        price = np.mean(paired_payoffs)
+        se = np.std(paired_payoffs, ddof = 1) / np.sqrt(n_half)
         ci = [price - 1.96 * se, price + 1.96 * se]
         return price, ci
     def plot_convergence(self):
