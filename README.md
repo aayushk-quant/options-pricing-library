@@ -20,6 +20,7 @@ The project includes:
 
 ### Black-Scholes
 Analytical pricing for European call and put options
+
 Features:
 * Price
 * Delta
@@ -31,6 +32,7 @@ Features:
 
 ### Binomial Tree (CRR)
 Cox-Ross-Rubinstein numerical method implementation
+
 Supports:
 * European call and put options
 * American put (and call) options
@@ -38,6 +40,7 @@ Supports:
 
 ### Monte Carlo Simulation
 Risk-neutral geometric Brownian motion simulations extended to exotic options
+
 Features:
 * European options
 * Asian options
@@ -48,6 +51,7 @@ Features:
 
 ### Volatility Smile
 Implied volatility extraction and visualisation
+
 Supports:
 * Synthetic volatility smiles
 * Market option chain analysis using Yahoo Finance data
