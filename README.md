@@ -107,14 +107,7 @@ C(sigma) = C_market
 
 The update rule is:
 
-$$
-\sigma_{n+1}
-=
-\sigma_n
--
-\frac{C(\sigma_n)-C_{market}}
-{\text{Vega}(\sigma_n)}
-$$
+$$\sigma_{n+1} = \sigma_n - \frac{C(\sigma_n) - C_{market}}{\text{Vega}(\sigma_n)}$$
 
 Safety features include:
 
