@@ -78,12 +78,12 @@ American Put price: 6.0896
 ===Monte Carlo===
 European Call price: 10.5123
 European Put price: 5.6305
+European Call 95% CI: [10.1220, 10.6936]
+European Put 95% CI: [5.3746, 5.7117]
 Asian Call price: 5.7348
 Asian Put price: 3.3608
 Barrier Call price: 8.9177
 Barrier Put price: 0.1835
-European Call 95% CI: [10.1220, 10.6936]
-European Put 95% CI: [5.3746, 5.7117]
 
 ===IV Solver===
 Implied Volatility: 0.2000
