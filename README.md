@@ -139,7 +139,7 @@ $$S_{t+\Delta t} = S_t \exp\left[\left(r - \frac{\sigma^2}{2}\right)\Delta t + \
 
 where $\varepsilon \sim N(0,1)$.
 
-Variance is reduced using antithetic variates. Each random draw \(\varepsilon\) is paired with \(-\varepsilon\), reducing estimator variance by averaging negatively correlated payoff samples.
+Variance is reduced using antithetic variates. Each random draw $\varepsilon$ is paired with $-\varepsilon$, reducing estimator variance by averaging negatively correlated payoff samples.
 
 ## File Structure
 ```text
