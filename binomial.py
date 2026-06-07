@@ -26,7 +26,7 @@ class Binomial:
             payoffs = np.maximum(ST - K, 0)
         else:
             payoffs = np.maximum(K - ST, 0)
-        for t in range (N):
+        for t in range(N):
             payoffs = np.exp(-r * (T / N)) * (p * payoffs[1:] + (1 - p) * payoffs[:-1])
         return payoffs[0]
     def price_american(self): #Backward induction: at each node take max of continuation value and early exercise
@@ -38,7 +38,7 @@ class Binomial:
             payoffs = np.maximum(ST - K, 0)
         else:
             payoffs = np.maximum(K - ST, 0)
-        for t in range (N - 1, -1, -1):
+        for t in range(N - 1, -1, -1):
             j = np.arange(t + 1)
             S_nodes = S * (u ** j) * (d ** (t - j))
             continuation = np.exp(-r * (T / N)) * (p * payoffs[1:t + 2] + (1 - p) * payoffs[:t + 1])
