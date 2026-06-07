@@ -59,6 +59,15 @@ Supports:
 ## Example Output
 
 ```text
+===Example Contract Specification===
+The base output below is generated with the following contract parameters:
+
+• Underlying Asset Price (S): 100.00
+• Strike Price (K): 100.00 
+• Time to Maturity (T): 1.00 Year 
+• Risk-Free Interest Rate (r): 5.00% (0.05)
+• Asset Volatility (σ): 20.00% (0.20)
+
 ===Black Scholes===
 Call price: 10.4506
 Put price: 5.5735
