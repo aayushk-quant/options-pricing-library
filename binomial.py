@@ -54,7 +54,7 @@ class Binomial:
         bs_price = BlackScholes(self.option).price()
         plt.plot(N_values, prices)
         plt.xlabel("Number of Steps")
-        plt.ylabel("Price over time")
+        plt.ylabel("Estimated Option Price")
         plt.title("Binomial Stock Price per Step")
         plt.axhline(y = bs_price, color = 'r', linestyle = '--', label = 'Black-Scholes')
         plt.legend()

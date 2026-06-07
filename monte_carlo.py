@@ -8,15 +8,13 @@ class MonteCarlo:
         self.option = option
         self.n_steps = n_steps
         self.n_simulations = n_simulations
-        self.seed = seed
+        self.rng = np.random.default_rng(seed)
         if n_simulations % 2 != 0: 
             raise ValueError('n_simulations must be even when using antithetic variates')
     def _simulate_paths(self): #Assumed geometric brownian motion under risk-neutral measure
         n_simulations, n_steps = self.n_simulations, self.n_steps
         S, T, r, sigma = self.option.S, self.option.T, self.option.r, self.option.sigma
-        if self.seed is not None:
-            np.random.seed(self.seed)
-        Z = np.random.standard_normal((n_simulations // 2, n_steps)) #Antithetic variates for variance reduction
+        Z = self.rng.standard_normal((n_simulations // 2, n_steps)) #Antithetic variates for variance reduction
         Z = np.vstack([Z, -Z])
         dt = T / n_steps
         increments = (r - (sigma ** 2) * 0.5) * dt + (sigma * np.sqrt(dt) * Z)
@@ -77,12 +75,12 @@ class MonteCarlo:
         ci = [price - 1.96 * se, price + 1.96 * se]
         return price, ci
     def plot_convergence(self):
-        N_values = range(10, 10000, 10)
+        N_values = range(20, 10000, 20)
         prices = [MonteCarlo(self.option, n_simulations=N).price() for N in N_values]
         bs_price = BlackScholes(self.option).price()
         plt.plot(N_values, prices)
         plt.xlabel("Number of Simulations")
-        plt.ylabel("Price over time")
+        plt.ylabel("Estimated Option Price")
         plt.title("MonteCarlo Convergence")
         plt.axhline(y = bs_price, color = 'r', linestyle = '--', label = 'Black-Scholes')
         plt.legend()
