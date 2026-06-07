@@ -33,7 +33,7 @@ class VolSmile:
         chain = tk.option_chain(expiry)
         calls = chain.calls
         spot = tk.info['currentPrice']
-        T = (datetime.strptime(expiry, '%Y-%m-%d') - datetime.today()).total_seconds() / (365 * 24 * 3600)
+        T = (datetime.strptime(expiry, '%Y-%m-%d') - datetime.today()).total_seconds() / 365 
         calls = calls[
             (calls['strike'] > 0.7 * spot) &
             (calls['strike'] < 1.3 * spot) &
