@@ -51,12 +51,15 @@ class BlackScholes:
         else:
             rho = -K * T * np.exp(-r * T) * norm.cdf(-d2)
         return rho / 100 #per 1% change in risk-free interest rate
-    def IV_solver(self, market_price):
+    def iv_solver(self, market_price):
         original_sigma = self.option.sigma
         sigma = self.option.sigma
         tolerance = 1e-6
         max_iter = 1000
-        intrinsic = max(self.option.S - self.option.K, 0) if self.option.option_type == 'call' else max (self.option.K - self.option.S, 0) 
+        if self.option.option_type == 'call':
+            intrinsic = max(self.option.S - self.option.K * np.exp(-self.option.r * self.option.T), 0)
+        else:
+            intrinsic = max(self.option.K * np.exp(-self.option.r * self.option.T) - self.option.S, 0)
         if market_price < intrinsic:
             raise ValueError('Market Price is lower than intrinsic value')
         if self.option.option_type == 'call' and market_price > self.option.S:

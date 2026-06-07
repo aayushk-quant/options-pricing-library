@@ -1,6 +1,6 @@
 # Option Pricing Library
 A Python derivatives pricing library implementing analytical, numerical and simulation based methods for pricing financial options.
-Built independently after approximately one week of learning Python.
+Built independently in Python, drawing on stochastic calculus and derivatives pricing theory from my BSc in Statistics, Economics and Finance at UCL.
 
 ## Features
 

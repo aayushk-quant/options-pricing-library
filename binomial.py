@@ -55,7 +55,7 @@ class Binomial:
         plt.plot(N_values, prices)
         plt.xlabel("Number of Steps")
         plt.ylabel("Estimated Option Price")
-        plt.title("Binomial Stock Price per Step")
+        plt.title("Option Price")
         plt.axhline(y = bs_price, color = 'r', linestyle = '--', label = 'Black-Scholes')
         plt.legend()
         plt.show()  
