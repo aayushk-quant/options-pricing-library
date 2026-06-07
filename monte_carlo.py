@@ -76,7 +76,7 @@ class MonteCarlo:
         return price, ci
     def plot_convergence(self):
         N_values = range(20, 10000, 20)
-        prices = [MonteCarlo(self.option, n_simulations=N).price() for N in N_values]
+        prices = [MonteCarlo(self.option, n_simulations=N, seed=42).price() for N in N_values]
         bs_price = BlackScholes(self.option).price()
         plt.plot(N_values, prices)
         plt.xlabel("Number of Simulations")
