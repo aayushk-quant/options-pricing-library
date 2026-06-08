@@ -18,7 +18,7 @@ if __name__ == "__main__":
     market_prices = [BlackScholes(OptionContract(100, i, 1, 0.05, 0.2 + 0.1 * ((i - 100) / 100) ** 2, 'call')).price() for i in strikes]
     pricec, cic = resultmcc.price_with_ci()
     pricep, cip = resultmcp.price_with_ci()
-
+    
     print('\n===Black Scholes===')
     print(f'Call price: {resultcbs.price():.4f}')
     print(f'Put price: {resultpbs.price():.4f}')

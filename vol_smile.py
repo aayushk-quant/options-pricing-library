@@ -28,18 +28,29 @@ class VolSmile:
         plt.show()
     def plot_market_smile(self, ticker: str, expiry: str = None):
         tk = yf.Ticker(ticker)
+        options = tk.options
+        if not options:
+            raise ValueError(f'No option expiries found for {ticker}')
         if expiry is None:
-            expiry = tk.options[3]
+            expiry = options[min(1, len(options) - 1)]
+        if expiry not in options:
+            raise ValueError(f"Expiry {expiry} not available for {ticker}")
         chain = tk.option_chain(expiry)
         calls = chain.calls
-        spot = tk.info['currentPrice']
-        T = (datetime.strptime(expiry, '%Y-%m-%d') - datetime.today()).total_seconds() / 365 
+        spot = tk.info.get('currentPrice')
+        if spot is None or spot <= 0:
+            raise ValueError(f"Could not retrieve valid spot price for {ticker}")
+        T = (datetime.strptime(expiry, "%Y-%m-%d").date() - datetime.today().date()).days / 365
+        if T <= 0:
+            raise ValueError("Expiry must be in the future")
         calls = calls[
             (calls['strike'] > 0.7 * spot) &
             (calls['strike'] < 1.3 * spot) &
             (calls['bid'] > 0) &
             (calls['ask'] > 0)
         ].copy()
+        if calls.empty:
+            raise ValueError("No valid option contracts after filtering")
         mid_prices = (calls['bid'] + calls['ask']) / 2
         r = self.option.r
         sigma_init = self.option.sigma
@@ -54,6 +65,8 @@ class VolSmile:
         strikes = calls['strike'].to_numpy()
         ivs = np.array(ivs)
         mask = ~np.isnan(ivs)
+        if not np.any(mask):
+            raise ValueError("No valid implied volatilities could be calculated")
         plt.plot(strikes[mask], ivs[mask])
         plt.xlabel('Strike')
         plt.ylabel('Implied Volatility')
